@@ -17,15 +17,18 @@ public class ctrlMenu implements MouseListener, KeyListener{
        this.ModeloMenu = menu;
        this.vistaMenu = frmmenu;
        
-       
-       
        //Siempre poner todos los botones que vamos a ocupar
        frmmenu.btnGuardar.addMouseListener(this);
+       frmmenu.btnEliminar.addMouseListener(this);
+       frmmenu.btnActualizar.addMouseListener(this);
        frmmenu.jtbMenu.addMouseListener(this);
+
+       
        
        ModeloMenu.Mostrar(vistaMenu.jtbMenu);
            
     }
+    
 
     @Override
     public void mouseClicked(MouseEvent e) {
@@ -41,9 +44,25 @@ public class ctrlMenu implements MouseListener, KeyListener{
         }
         
         if(e.getSource()== vistaMenu.btnEliminar){
+            System.err.println("Se ha eliminado un Taco");
             ModeloMenu.Eliminar(vistaMenu.jtbMenu);
             ModeloMenu.Mostrar(vistaMenu.jtbMenu);
         }
+        
+        if(e.getSource() == vistaMenu.jtbMenu){
+            ModeloMenu.cargarDatosTabla(vistaMenu);
+        }
+        
+        if(e.getSource() == vistaMenu.btnActualizar){
+            ModeloMenu.setNombre(vistaMenu.txtNombre.getText());
+            ModeloMenu.setPrecio(Double.parseDouble(vistaMenu.txtPrecio.getText()));
+            ModeloMenu.setIngredientes(vistaMenu.txtIngrediente.getText());
+            
+            ModeloMenu.Actualizar(vistaMenu.jtbMenu);
+            ModeloMenu.Mostrar(vistaMenu.jtbMenu);
+            
+        }
+        
         
     }
 
